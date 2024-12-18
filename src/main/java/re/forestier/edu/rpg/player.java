@@ -9,7 +9,6 @@ public class player {
     private String AvatarClass;
 
     public Integer money;
-    private Float __real_money__;
 
 
     public int level;
@@ -20,21 +19,21 @@ public class player {
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
-    public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
+    public player(String playerName, String avatar_name, String avatarClass, Integer money, ArrayList<String> inventory) {
         if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
             return;
         }
 
         this.playerName = playerName;
-        Avatar_name = avatar_name;
-        AvatarClass = avatarClass;
+        this.Avatar_name = avatar_name;
+        this.AvatarClass = avatarClass;
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
     }
 
     public String getAvatarClass () {
-        return AvatarClass;
+        return this.AvatarClass;
     }
 
     public void removeMoney(int amount) throws IllegalArgumentException {
@@ -72,16 +71,4 @@ public class player {
     public int getXp() {
         return this.xp;
     }
-
-    /*
-    Ингредиенты:
-        Для теста:
-
-            250 г муки
-            125 г сливочного масла (холодное)
-            70 г сахара
-            1 яйцо
-            1 щепотка соли
-     */
-
 }
