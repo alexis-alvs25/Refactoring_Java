@@ -7,7 +7,7 @@ public class Player {
     public String playerName;
     public String avatarName;
     private String avatarClass;
-    public Integer money;
+    public int money;
     protected int xp;
     public int level;
     public int healthpoints;
@@ -15,7 +15,7 @@ public class Player {
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
-    public Player(String playerName, String avatarName, String avatarClass, Integer money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, String avatarClass, int money, ArrayList<String> inventory) {
         if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
             return;
         }
@@ -38,17 +38,21 @@ public class Player {
         return this.xp;
     }
 
-    public void removeMoney(int amount) throws IllegalArgumentException {
+    public void removeMoney(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount cannot be negative");
+        }
         if (money - amount < 0) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
-
-        money = Integer.parseInt(money.toString()) - amount;
+        money -= amount;
     }
 
     public void addMoney(int amount) {
-        var value = Integer.valueOf(amount);
-        money = money + (value != null ? value : 0);
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount cannot be negative");
+        }
+        money += amount;
     }
 
     public int retrieveLevel() {
