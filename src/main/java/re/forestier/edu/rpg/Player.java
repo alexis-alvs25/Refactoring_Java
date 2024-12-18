@@ -3,23 +3,22 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class player {
+public class Player {
     public String playerName;
     public String Avatar_name;
     private String AvatarClass;
 
     public Integer money;
 
-
     public int level;
     public int healthpoints;
     public int currenthealthpoints;
     protected int xp;
 
-
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
-    public player(String playerName, String avatar_name, String avatarClass, Integer money, ArrayList<String> inventory) {
+
+    public Player(String playerName, String avatar_name, String avatarClass, Integer money, ArrayList<String> inventory) {
         if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
             return;
         }
@@ -36,6 +35,10 @@ public class player {
         return this.AvatarClass;
     }
 
+    public int getXp() {
+        return this.xp;
+    }
+
     public void removeMoney(int amount) throws IllegalArgumentException {
         if (money - amount < 0) {
             throw new IllegalArgumentException("Player can't have a negative money!");
@@ -43,10 +46,12 @@ public class player {
 
         money = Integer.parseInt(money.toString()) - amount;
     }
+
     public void addMoney(int amount) {
         var value = Integer.valueOf(amount);
         money = money + (value != null ? value : 0);
     }
+
     public int retrieveLevel() {
         // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
         HashMap<Integer, Integer> levels = new HashMap<>();
@@ -66,9 +71,5 @@ public class player {
         }
         if (xp < levels.get(5)) return 4;
         return 5;
-    }
-
-    public int getXp() {
-        return this.xp;
     }
 }
