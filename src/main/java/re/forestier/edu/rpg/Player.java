@@ -56,23 +56,17 @@ public class Player {
     }
 
     public int retrieveLevel() {
-        // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
         HashMap<Integer, Integer> levels = new HashMap<>();
-        levels.put(2,10); // 1*10 + ((2*0)/4)
-        levels.put(3,27); // 2*10 + ((3*10)/4)
-        levels.put(4,57); // 3*10 + ((4*27)/4)
-        levels.put(5,111); // 4*10 + ((5*57)/4)
-        //TODO : ajouter les prochains niveaux
-
-        if (xp < levels.get(2)) {
-            return 1;
+        int maximumLevel = 10;                  // Niveau maximum choisi arbitrairement
+        levels.put(1, 0);
+        
+        for (int lvl = 2; lvl <= maximumLevel; lvl++) {
+            int xpRequired = ((lvl - 1) * 10 + (lvl * levels.get(lvl - 1)) / 4);        // Formule pour calculer l'xp nécessaire pour passer au niveau suivant
+            levels.put(lvl, xpRequired);        // On ajoute l'xp nécessaire pour passer au niveau suivant dans la map
+            if (this.xp < levels.get(lvl)) {    // Si le joueur n'a pas assez d'xp pour passer au niveau suivant, on retourne le niveau actuel
+                return lvl - 1;
+            }
         }
-        else if (xp < levels.get(3)) {return 2;
-        }
-        if (xp < levels.get(4)) {
-            return 3;
-        }
-        if (xp < levels.get(5)) return 4;
-        return 5;
+        return maximumLevel;
     }
 }
