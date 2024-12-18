@@ -5,34 +5,33 @@ import java.util.HashMap;
 
 public class Player {
     public String playerName;
-    public String Avatar_name;
-    private String AvatarClass;
-
+    public String avatarName;
+    private String avatarClass;
     public Integer money;
-
+    protected int xp;
     public int level;
     public int healthpoints;
     public int currenthealthpoints;
-    protected int xp;
-
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
-    public Player(String playerName, String avatar_name, String avatarClass, Integer money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, String avatarClass, Integer money, ArrayList<String> inventory) {
         if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
             return;
         }
-
         this.playerName = playerName;
-        this.Avatar_name = avatar_name;
-        this.AvatarClass = avatarClass;
-        this.money = Integer.valueOf(money);
+        this.avatarName = avatarName;
+        this.avatarClass = avatarClass;
+        this.money = money;
+        this.level = 1;
+        this.healthpoints = 100;
+        this.currenthealthpoints = 100;
         this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
+        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass).get(1);
     }
 
     public String getAvatarClass () {
-        return this.AvatarClass;
+        return this.avatarClass;
     }
 
     public int getXp() {
