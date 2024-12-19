@@ -112,7 +112,7 @@ public class UpdatePlayer {
             player.addInventory(objectList[random.nextInt(objectList.length)]);     // Give a random object
 
             // Add/upgrade abilities to player
-            HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass()).get(newLevel);
+            HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass().name()).get(newLevel);
             abilities.forEach((ability, level) -> {
                 player.abilities.put(ability, abilities.get(ability));
             });
@@ -129,18 +129,18 @@ public class UpdatePlayer {
         }
 
         if(player.getCurrentHealthPoints() < player.getHealthPoints()/2) {
-            if(!player.getAvatarClass().equals("ADVENTURER")) {
-                if(player.getAvatarClass().equals("DWARF")) {
+            if(!player.getAvatarClass().name().equals("ADVENTURER")) {
+                if(player.getAvatarClass().name().equals("DWARF")) {
                     if(player.getInventory().contains("Holy Elixir")) {
                         player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 1);
                     }
                     player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 1);
-                } else if(player.getAvatarClass().equals("ADVENTURER")) {
+                } else if(player.getAvatarClass().name().equals("ADVENTURER")) {
                     player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 2);
                 }
 
 
-                if(player.getAvatarClass().equals("ARCHER")) {
+                if(player.getAvatarClass().name().equals("ARCHER")) {
                     player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 1);
                     if(player.getInventory().contains("Magic Bow")) {
                         player.setCurrentHealthPoints(player.getCurrentHealthPoints() + player.getCurrentHealthPoints()/8-1);
