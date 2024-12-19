@@ -22,7 +22,7 @@ public class UnitTests {
     void testAddMoney() {
         Player player = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         player.addMoney(50);
-        assertThat(player.money, is(150));
+        assertThat(player.getMoney(), is(150));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class UnitTests {
     void testRemoveMoney() {
         Player player = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         player.removeMoney(50);
-        assertThat(player.money, is(50));
+        assertThat(player.getMoney(), is(50));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class UnitTests {
     void testNegativeMoneyMutation() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         p.removeMoney(100);
-        assertEquals(p.money, 0);
+        assertEquals(p.getMoney(), 0);
     }
 
     @Test
@@ -140,101 +140,101 @@ public class UnitTests {
     @DisplayName("Current health points == 0")
     void testMajFinDeTour() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 0;
+        p.setCurrentHealthPoints(0);
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(0));
+        assertThat(p.getCurrentHealthPoints(), is(0));
     }
 
     @Test
     @DisplayName("currenthealthpoints < healthpoints/2, Dwarf, Holy Elixir")
     void testMajFinDeTour2() {
         Player p = new Player("Florian", "Grognak le barbare", "DWARF", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
-        p.inventory.add("Holy Elixir");
+        p.setCurrentHealthPoints(1);
+        p.setHealthPoints(4);
+        p.addInventory("Holy Elixir");
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(3));
+        assertThat(p.getCurrentHealthPoints(), is(3));
     }
 
     @Test
     @DisplayName("currenthealthpoints < healthpoints/2, Dwarf")
     void testMajFinDeTour3() {
         Player p = new Player("Florian", "Grognak le barbare", "DWARF", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
+        p.setCurrentHealthPoints(1);
+        p.setHealthPoints(4);
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(2));
+        assertThat(p.getCurrentHealthPoints(), is(2));
     }
 
     @Test
     @DisplayName("currenthealthpoints < healthpoints/2, Archer, Magic Bow")
     void testMajFinDeTour4() {
         Player p = new Player("Florian", "Grognak le barbare", "ARCHER", 100, new ArrayList<>());
-        p.currenthealthpoints = 15;
-        p.healthpoints = 34;
-        p.inventory.add("Magic Bow");
+        p.setCurrentHealthPoints(15);
+        p.setHealthPoints(34);
+        p.addInventory("Magic Bow");
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(17));
+        assertThat(p.getCurrentHealthPoints(), is(17));
     }
 
     @Test
     @DisplayName("currenthealthpoints < healthpoints/2, Archer")
     void testMajFinDeTour5() {
         Player p = new Player("Florian", "Grognak le barbare", "ARCHER", 100, new ArrayList<>());
-        p.currenthealthpoints = 15;
-        p.healthpoints = 34;
+        p.setCurrentHealthPoints(15);
+        p.setHealthPoints(34);
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(16));
+        assertThat(p.getCurrentHealthPoints(), is(16));
     }
 
     @Test
     @DisplayName("currenthealthpoints < healthpoints/2, Adventurer, retrieveLevel < 3")
     void testMajFinDeTour6() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
+        p.setCurrentHealthPoints(1);
+        p.setHealthPoints(4);
         p.retrieveLevel();
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(2));
+        assertThat(p.getCurrentHealthPoints(), is(2));
     }
 
     @Test
     @DisplayName("currenthealthpoints < healthpoints/2, Adventurer, retrieveLevel > 3")
     void testMajFinDeTour7() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 100;
+        p.setCurrentHealthPoints(1);
+        p.setHealthPoints(100);
         UpdatePlayer.addXp(p, 30);
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(3));
+        assertThat(p.getCurrentHealthPoints(), is(3));
     }
 
     @Test
     @DisplayName("currenthealthpoints >= healthpoints/2")
     void testMajFinDeTour8() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 4;
-        p.healthpoints = 4;
+        p.setCurrentHealthPoints(4);
+        p.setHealthPoints(4);
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(4));
+        assertThat(p.getCurrentHealthPoints(), is(4));
     }
 
     @Test
     @DisplayName("currenthealthpoints < healthpoints")
     void testMajFinDeTour9() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 2;
+        p.setCurrentHealthPoints(1);
+        p.setHealthPoints(2);
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(1));
+        assertThat(p.getCurrentHealthPoints(), is(1));
     }
 
     @Test
     @DisplayName("Print test")
     void testAffichage() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.inventory.add("Magic Bow");
-        p.inventory.add("Healing Potion");
+        p.addInventory("Magic Bow");
+        p.addInventory("Healing Potion");
 
         String result = Affichage.afficherJoueur(p);
 

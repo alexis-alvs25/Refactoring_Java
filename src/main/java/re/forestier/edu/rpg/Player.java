@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
-    public String playerName;
-    public String avatarName;
+    private String playerName;
+    private String avatarName;
     private String avatarClass;
-    public int money;
+    private int money;
     protected int xp;
-    public int level;
-    public int healthpoints;
-    public int currenthealthpoints;
-    public HashMap<String, Integer> abilities;
+    private int level;
+    private int healthpoints;
+    private int currenthealthpoints;
+    protected HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
     public Player(String playerName, String avatarName, String avatarClass, int money, ArrayList<String> inventory) {
@@ -30,12 +30,58 @@ public class Player {
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass).get(1);
     }
 
+    // ------------------- Getters -------------------
+
+    public String getPlayerName() {
+        return this.playerName;
+    }
+
+    public String getAvatarName() {
+        return this.avatarName;
+    }
+
     public String getAvatarClass () {
         return this.avatarClass;
     }
 
+    public int getMoney() {
+        return this.money;
+    }
+
     public int getXp() {
         return this.xp;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public int getHealthPoints() {
+        return this.healthpoints;
+    }
+
+    public int getCurrentHealthPoints() {
+        return this.currenthealthpoints;
+    }
+
+    public ArrayList<String> getInventory() {
+        return this.inventory;
+    }
+
+    // ------------------- Setters -------------------
+
+    public void setHealthPoints (int healthpoints) {
+        this.healthpoints = healthpoints;
+    }
+
+    public void setCurrentHealthPoints(int currenthealthpoints) {
+        this.currenthealthpoints = currenthealthpoints;
+    }
+
+    // ------------------- Methods -------------------
+
+    public void addInventory(String object) {
+        this.inventory.add(object);
     }
 
     public void removeMoney(int amount) {
