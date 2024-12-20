@@ -19,7 +19,7 @@ public class GlobalTest {
     @Test
     void testAffichageBase() {
         Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 200, new ArrayList<>());
-        UpdatePlayer.addXp(player, 20);
+        player.addXp(20);
         player.inventory = new ArrayList<>();
 
         verify(player.toString());

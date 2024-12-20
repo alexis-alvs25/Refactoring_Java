@@ -15,7 +15,6 @@ import re.forestier.edu.rpg.Archer;
 import re.forestier.edu.rpg.AvatarClass;
 import re.forestier.edu.rpg.Dwarf;
 import re.forestier.edu.rpg.Player;
-import re.forestier.edu.rpg.UpdatePlayer;
 
 public class UnitTests {
 
@@ -88,7 +87,7 @@ public class UnitTests {
     @DisplayName("Add 0xp should do nothing")
     void testAddXp() {
         Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
-        UpdatePlayer.addXp(player, 0);
+        player.addXp(0);
         assertThat(player.getXp(), is(0));
     }
 
@@ -103,7 +102,7 @@ public class UnitTests {
     @DisplayName("Retrieve Level 2")
     void testRetrieveLevel2() {
         Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
-        UpdatePlayer.addXp(player, 10);
+        player.addXp(10);
         assertThat(player.retrieveLevel(), is(2));
     }
 
@@ -111,7 +110,7 @@ public class UnitTests {
     @DisplayName("Retrieve Level 3")
     void testRetrieveLevel3() {
         Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
-        UpdatePlayer.addXp(player, 27);
+        player.addXp(27);
         assertThat(player.retrieveLevel(), is(3));
     }
 
@@ -119,7 +118,7 @@ public class UnitTests {
     @DisplayName("Retrieve Level 4")
     void testRetrieveLevel4() {
         Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
-        UpdatePlayer.addXp(player, 57);
+        player.addXp(57);
         assertThat(player.retrieveLevel(), is(4));
     }
 
@@ -127,7 +126,7 @@ public class UnitTests {
     @DisplayName("Retrieve Level 5")
     void testRetrieveLevel5() {
         Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
-        UpdatePlayer.addXp(player, 111);
+        player.addXp(111);
         assertThat(player.retrieveLevel(), is(5));
     }
 
@@ -199,7 +198,7 @@ public class UnitTests {
         Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         p.setCurrentHealthPoints(1);
         p.setHealthPoints(100);
-        UpdatePlayer.addXp(p, 30);
+        p.addXp(30);
         p.majFinDeTour();
         assertThat(p.getCurrentHealthPoints(), is(3));
     }

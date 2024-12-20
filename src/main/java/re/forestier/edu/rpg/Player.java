@@ -2,6 +2,7 @@ package re.forestier.edu.rpg;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Player {
     private String playerName;
@@ -122,6 +123,29 @@ public class Player {
         if (currenthealthpoints >= healthpoints) {
             currenthealthpoints = healthpoints;
         }
+    }
+
+    private static final Random random = new Random();
+
+    public boolean addXp(int xp) {
+        if (xp < 0) {
+            throw new IllegalArgumentException("XP cannot be negative");
+        }
+        this.xp += xp;
+        int currentLevel = this.level;
+        int newLevel = this.retrieveLevel();
+
+        if (newLevel > currentLevel) {                                                                      // Player leveled-up!
+            this.addInventory(Object.getObjectlist()[random.nextInt(Object.getObjectlist().length)]);     // Give a random object
+
+            // Add/upgrade abilities to player
+            HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(this.avatarClass.name()).get(newLevel);
+            abilities.forEach((ability, level) -> {
+                this.abilities.put(ability, abilities.get(ability));
+            });
+            return true;
+        }
+        return false;
     }
 
     @Override
