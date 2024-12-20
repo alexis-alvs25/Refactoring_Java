@@ -2,7 +2,6 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.AvatarClass;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.UpdatePlayer;
@@ -23,6 +22,6 @@ public class GlobalTest {
         UpdatePlayer.addXp(player, 20);
         player.inventory = new ArrayList<>();
 
-        verify(Affichage.afficherJoueur(player));
+        verify(player.toString());
     }
 }

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import re.forestier.edu.rpg.Adventurer;
-import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.Archer;
 import re.forestier.edu.rpg.AvatarClass;
 import re.forestier.edu.rpg.Dwarf;
@@ -232,7 +231,7 @@ public class UnitTests {
         p.addInventory("Magic Bow");
         p.addInventory("Healing Potion");
 
-        String result = Affichage.afficherJoueur(p);
+        String result = p.toString();
 
         // Utilise AssertJ pour vérifier les éléments de l'inventaire
         assertThat(result, result.contains("Magic Bow"));
