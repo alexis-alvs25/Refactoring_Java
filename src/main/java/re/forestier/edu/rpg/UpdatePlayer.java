@@ -120,48 +120,4 @@ public class UpdatePlayer {
         }
         return false;
     }
-
-    // majFinDeTour met à jour les points de vie
-    public static void majFinDeTour(Player player) {
-        if(player.getCurrentHealthPoints() == 0) {
-            System.out.println("Le joueur est KO !");
-            return;
-        }
-
-        if(player.getCurrentHealthPoints() < player.getHealthPoints()/2) {
-            if(!player.getAvatarClass().name().equals("ADVENTURER")) {
-                if(player.getAvatarClass().name().equals("DWARF")) {
-                    if(player.getInventory().contains("Holy Elixir")) {
-                        player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 1);
-                    }
-                    player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 1);
-                } else if(player.getAvatarClass().name().equals("ADVENTURER")) {
-                    player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 2);
-                }
-
-
-                if(player.getAvatarClass().name().equals("ARCHER")) {
-                    player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 1);
-                    if(player.getInventory().contains("Magic Bow")) {
-                        player.setCurrentHealthPoints(player.getCurrentHealthPoints() + player.getCurrentHealthPoints()/8-1);
-                    }
-                }
-            } else {
-                player.setCurrentHealthPoints(player.getCurrentHealthPoints() + 2);
-                if(player.retrieveLevel() < 3) {
-                    player.setCurrentHealthPoints(player.getCurrentHealthPoints() - 1);
-                }
-            }
-        } else if(player.getCurrentHealthPoints() >= player.getHealthPoints()/2){
-            if(player.getCurrentHealthPoints() >= player.getHealthPoints()) {
-                player.setCurrentHealthPoints(player.getHealthPoints());
-                return;
-            }
-        }
-
-
-        if(player.getCurrentHealthPoints() >= player.getHealthPoints()) {
-            player.setCurrentHealthPoints(player.getHealthPoints());
-        }
-    }
 }

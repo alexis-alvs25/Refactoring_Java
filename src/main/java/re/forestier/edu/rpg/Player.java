@@ -10,8 +10,8 @@ public class Player {
     private int money;
     protected int xp;
     private int level;
-    private int healthpoints;
-    private int currenthealthpoints;
+    protected int healthpoints;
+    protected int currenthealthpoints;
     protected HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
@@ -21,8 +21,8 @@ public class Player {
         this.avatarClass = avatarClass;
         this.money = money;
         this.level = 1;
-        this.healthpoints = 100;
-        this.currenthealthpoints = 100;
+        this.healthpoints = 2;
+        this.currenthealthpoints = 1;
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass.name()).get(1);
     }
@@ -111,5 +111,16 @@ public class Player {
             }
         }
         return maximumLevel;
+    }
+
+    public void majFinDeTour() {
+        if (currenthealthpoints == 0) {
+            System.out.println("Le joueur est KO !");
+            return;
+        }
+
+        if (currenthealthpoints >= healthpoints) {
+            currenthealthpoints = healthpoints;
+        }
     }
 }
