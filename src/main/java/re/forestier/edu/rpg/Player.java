@@ -17,7 +17,7 @@ public abstract class Player {
     protected HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
-    public Player(String playerName, String avatarName, AvatarClass avatarClass, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, AvatarClass avatarClass, int money) {
         this.playerName = playerName;
         this.avatarName = avatarName;
         this.avatarClass = avatarClass;
@@ -25,7 +25,7 @@ public abstract class Player {
         this.level = 1;
         this.healthpoints = 100;
         this.currenthealthpoints = 100;
-        this.inventory = inventory;
+        this.inventory = new ArrayList<>();
         this.abilities = new HashMap<>(getAbilitiesByLevel(avatarClass, 1));
     }
 

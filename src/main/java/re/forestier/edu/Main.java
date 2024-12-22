@@ -3,11 +3,9 @@ import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.AvatarClass;
 import re.forestier.edu.rpg.Player;
 
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
-        Player firstPlayer = new Adventurer("Florian", "Ruzberg de Rivehaute", AvatarClass.ADVENTURER, 200, new ArrayList<>());
+        Player firstPlayer = new Adventurer("Florian", "Ruzberg de Rivehaute", AvatarClass.ADVENTURER, 200);
         firstPlayer.addMoney(400);
 
         firstPlayer.addXp(15);

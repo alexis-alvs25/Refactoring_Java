@@ -13,7 +13,7 @@ public class GlobalTest {
 
     @Test
     void testAffichageBase() {
-        Player player = new Adventurer("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 200, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 200);
         player.addXp(20);
         player.inventory = new ArrayList<>();
 

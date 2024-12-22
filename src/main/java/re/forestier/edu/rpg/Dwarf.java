@@ -1,12 +1,11 @@
 package re.forestier.edu.rpg;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Dwarf extends Player {
-    public Dwarf(String playerName, String avatarName, AvatarClass avatarClass, int money, ArrayList<String> inventory) {
-        super(playerName, avatarName, avatarClass, money, inventory);
+    public Dwarf(String playerName, String avatarName, AvatarClass avatarClass, int money) {
+        super(playerName, avatarName, avatarClass, money);
     }
 
     public static final Map<AvatarClass, Map<Integer, Map<String, Integer>>> DWARF_ABILITIES = Map.of(
