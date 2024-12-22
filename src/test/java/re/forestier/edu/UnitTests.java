@@ -21,7 +21,7 @@ public class UnitTests {
     @Test
     @DisplayName("Add money")
     void testAddMoney() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         player.addMoney(50);
         assertThat(player.getMoney(), is(150));
     }
@@ -29,7 +29,7 @@ public class UnitTests {
     @Test
     @DisplayName("Remove Money")
     void testRemoveMoney() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         player.removeMoney(50);
         assertThat(player.getMoney(), is(50));
     }
@@ -37,7 +37,7 @@ public class UnitTests {
     @Test
     @DisplayName("Impossible to have negative money")
     void testNegativeMoney() {
-        Player p = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
 
         try {
             p.removeMoney(200);
@@ -50,7 +50,7 @@ public class UnitTests {
     @Test
     @DisplayName("Remove money equal 0 - Pitest Mutation")
     void testNegativeMoneyMutation() {
-        Player p = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         p.removeMoney(100);
         assertEquals(p.getMoney(), 0);
     }
@@ -58,35 +58,35 @@ public class UnitTests {
     @Test
     @DisplayName("Class test Adventurer")
     void testPlayerClassAdventurer() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         assertThat(player.getAvatarClass(), is(AvatarClass.ADVENTURER));
     }
 
     @Test
     @DisplayName("Class test Archer")
     void testPlayerClassArcher() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ARCHER, 100, new ArrayList<>());
+        Player player = new Archer("Florian", "Grognak le barbare", AvatarClass.ARCHER, 100, new ArrayList<>());
         assertThat(player.getAvatarClass(), is(AvatarClass.ARCHER));
     }
 
     @Test
     @DisplayName("Class test Dwarf")
     void testPlayerClassDwarf() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.DWARF, 100, new ArrayList<>());
+        Player player = new Dwarf("Florian", "Grognak le barbare", AvatarClass.DWARF, 100, new ArrayList<>());
         assertThat(player.getAvatarClass(), is(AvatarClass.DWARF));
     }
 
     @Test
     @DisplayName("Get xp")
     void testGetXp() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         assertThat(player.getXp(), is(0));
     }
 
     @Test
     @DisplayName("Add 0xp should do nothing")
     void testAddXp() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         player.addXp(0);
         assertThat(player.getXp(), is(0));
     }
@@ -94,14 +94,14 @@ public class UnitTests {
     @Test
     @DisplayName("Retrieve Level 1")
     void testRetrieveLevel1() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         assertThat(player.retrieveLevel(), is(1));
     }
 
     @Test
     @DisplayName("Retrieve Level 2")
     void testRetrieveLevel2() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         player.addXp(10);
         assertThat(player.retrieveLevel(), is(2));
     }
@@ -109,7 +109,7 @@ public class UnitTests {
     @Test
     @DisplayName("Retrieve Level 3")
     void testRetrieveLevel3() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         player.addXp(27);
         assertThat(player.retrieveLevel(), is(3));
     }
@@ -117,7 +117,7 @@ public class UnitTests {
     @Test
     @DisplayName("Retrieve Level 4")
     void testRetrieveLevel4() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         player.addXp(57);
         assertThat(player.retrieveLevel(), is(4));
     }
@@ -125,7 +125,7 @@ public class UnitTests {
     @Test
     @DisplayName("Retrieve Level 5")
     void testRetrieveLevel5() {
-        Player player = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         player.addXp(111);
         assertThat(player.retrieveLevel(), is(5));
     }
@@ -226,7 +226,7 @@ public class UnitTests {
     @Test
     @DisplayName("Print test")
     void testAffichage() {
-        Player p = new Player("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100, new ArrayList<>());
         p.addInventory("Magic Bow");
         p.addInventory("Healing Potion");
 

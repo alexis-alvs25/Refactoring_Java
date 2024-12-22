@@ -2,12 +2,13 @@ package re.forestier.edu.rpg;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
-public class Player {
+public abstract class Player {
     private String playerName;
     private String avatarName;
-    private AvatarClass avatarClass;
+    protected AvatarClass avatarClass;
     private int money;
     protected int xp;
     private int level;
@@ -22,10 +23,10 @@ public class Player {
         this.avatarClass = avatarClass;
         this.money = money;
         this.level = 1;
-        this.healthpoints = 2;
-        this.currenthealthpoints = 1;
+        this.healthpoints = 100;
+        this.currenthealthpoints = 100;
         this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass.name()).get(1);
+        this.abilities = new HashMap<>(getAbilitiesByLevel(avatarClass, 1));
     }
 
     // ------------------- Getters -------------------
@@ -99,6 +100,8 @@ public class Player {
         money += amount;
     }
 
+    protected abstract HashMap<String, Integer> getAbilitiesByLevel(AvatarClass adventurer, int level);
+
     public int retrieveLevel() {
         HashMap<Integer, Integer> levels = new HashMap<>();
         int maximumLevel = 10;                  // Niveau maximum choisi arbitrairement
@@ -132,17 +135,18 @@ public class Player {
             throw new IllegalArgumentException("XP cannot be negative");
         }
         this.xp += xp;
-        int currentLevel = this.level;
-        int newLevel = this.retrieveLevel();
+        int newLevel = retrieveLevel();
 
-        if (newLevel > currentLevel) {                                                                      // Player leveled-up!
-            this.addInventory(Object.getObjectlist()[random.nextInt(Object.getObjectlist().length)]);     // Give a random object
+        if (newLevel > this.level) {                                                                           // Player leveled-up!
+            this.level = newLevel;
+            addInventory(Object.getObjectlist()[random.nextInt(Object.getObjectlist().length)]);     // Give a random object
 
             // Add/upgrade abilities to player
-            HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(this.avatarClass.name()).get(newLevel);
-            abilities.forEach((ability, level) -> {
-                this.abilities.put(ability, abilities.get(ability));
+            HashMap<String, Integer> newAbilities = new HashMap<>(this.abilities);
+            getAbilitiesByLevel(this.avatarClass, this.level).forEach((ability, level) -> {
+                newAbilities.put(ability, level);
             });
+            this.abilities = newAbilities;
             return true;
         }
         return false;
@@ -151,13 +155,20 @@ public class Player {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Joueur ").append(avatarName).append(" joué par ").append(playerName);
-        sb.append("\nNiveau : ").append(retrieveLevel()).append(" (XP totale : ").append(xp).append(")");
-        sb.append("\n\nCapacités :");
-        abilities.forEach((name, level) -> sb.append("\n   ").append(name).append(" : ").append(level));
-        sb.append("\n\nInventaire :");
-        inventory.forEach(item -> sb.append("\n   ").append(item));
 
+        sb.append("Joueur ").append(avatarName).append(" joué par ").append(playerName)
+          .append("\nNiveau : ").append(retrieveLevel()).append(" (XP totale : ").append(xp).append(")")
+          .append("\n\nCapacités :");
+    
+        List<String> abilityOrder = List.of("DEF", "ATK", "CHA", "INT", "ALC", "VIS");
+    
+        abilityOrder.stream()
+            .filter(abilities::containsKey) // Ne garde que les capacités présentes
+            .forEach(name -> sb.append("\n   ").append(name).append(" : ").append(abilities.get(name)));
+    
+        sb.append("\n\nInventaire :");
+        inventory.stream().forEach(item -> sb.append("\n   ").append(item));
+    
         return sb.toString();
     }
 }
