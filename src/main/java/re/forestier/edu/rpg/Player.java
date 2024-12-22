@@ -15,7 +15,7 @@ public abstract class Player {
     protected int healthpoints;
     protected int currenthealthpoints;
     protected HashMap<String, Integer> abilities;
-    public ArrayList<String> inventory;
+    protected ArrayList<String> inventory;
 
     public Player(String playerName, String avatarName, AvatarClass avatarClass, int money) {
         this.playerName = playerName;
@@ -75,6 +75,10 @@ public abstract class Player {
 
     public void setCurrentHealthPoints(int currenthealthpoints) {
         this.currenthealthpoints = currenthealthpoints;
+    }
+
+    public void setInventory(ArrayList<String> inventory) {
+        this.inventory = inventory;
     }
 
     // ------------------- Methods -------------------
