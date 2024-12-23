@@ -246,7 +246,7 @@ public class UnitTests {
         Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
         String result = player.toMarkdown();
 
-        assertThat(result, result.startsWith("## Joueur Gnognak le Barbare joué par Florian"));
+        assertThat(result, result.startsWith("## Joueur Grognak le barbare joué par Florian"));
     }
 
     @Test
