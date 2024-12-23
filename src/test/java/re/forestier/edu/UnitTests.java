@@ -134,7 +134,7 @@ public class UnitTests {
     void testMajFinDeTour() {
         Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
         p.setCurrentHealthPoints(0);
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(0));
     }
 
@@ -145,7 +145,7 @@ public class UnitTests {
         p.setCurrentHealthPoints(1);
         p.setHealthPoints(4);
         p.addObjectToInventory(new GameObject("Holy Elixir", "Recover your HP", 4, 70));
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(3));
     }
 
@@ -155,7 +155,7 @@ public class UnitTests {
         Player p = new Dwarf("Florian", "Grognak le barbare", AvatarClass.DWARF, 100);
         p.setCurrentHealthPoints(1);
         p.setHealthPoints(4);
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(2));
     }
 
@@ -166,7 +166,7 @@ public class UnitTests {
         p.setCurrentHealthPoints(15);
         p.setHealthPoints(34);
         p.addObjectToInventory(new GameObject("Magic Bow", "Beautifull magic bow ^^", 8, 120));
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(17));
     }
 
@@ -176,7 +176,7 @@ public class UnitTests {
         Player p = new Archer("Florian", "Grognak le barbare", AvatarClass.ARCHER, 100);
         p.setCurrentHealthPoints(15);
         p.setHealthPoints(34);
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(16));
     }
 
@@ -187,7 +187,7 @@ public class UnitTests {
         p.setCurrentHealthPoints(1);
         p.setHealthPoints(4);
         p.retrieveLevel();
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(2));
     }
 
@@ -198,7 +198,7 @@ public class UnitTests {
         p.setCurrentHealthPoints(1);
         p.setHealthPoints(100);
         p.addXp(30);
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(3));
     }
 
@@ -208,7 +208,7 @@ public class UnitTests {
         Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
         p.setCurrentHealthPoints(4);
         p.setHealthPoints(4);
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(4));
     }
 
@@ -218,7 +218,7 @@ public class UnitTests {
         Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
         p.setCurrentHealthPoints(1);
         p.setHealthPoints(2);
-        p.majFinDeTour();
+        p.updateHealth();
         assertThat(p.getCurrentHealthPoints(), is(1));
     }
 
@@ -226,8 +226,8 @@ public class UnitTests {
     @DisplayName("Print test")
     void testAffichage() {
         Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
-        p.addObjectToInventory(new GameObject("Magic Bow", "Beautifull magic bow ^^", 8, 120));
-        p.addObjectToInventory(new GameObject("Healing Potion", "Beautifull magic bow ^^", 1, 30));
+        p.addObjectToInventory(new GameObject("Magic Bow", "A bow enchanted to increase precision and damage", 8, 120));
+        p.addObjectToInventory(new GameObject("Healing Potion", "Restores a significant amount of health when consumed", 1, 30));
 
         String result = p.toString();
 

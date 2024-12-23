@@ -1,22 +1,18 @@
 package re.forestier.edu;
+
 import re.forestier.edu.rpg.Adventurer;
-import re.forestier.edu.rpg.Archer;
 import re.forestier.edu.rpg.AvatarClass;
-import re.forestier.edu.rpg.Dwarf;
 import re.forestier.edu.rpg.GameObject;
-import re.forestier.edu.rpg.Goblin;
 import re.forestier.edu.rpg.Player;
 
-@SuppressWarnings("unused")
 public class Main {
     public static void main(String[] args) {
-        Player firstPlayer = new Dwarf("Florian", "Ruzberg de Rivehaute", AvatarClass.DWARF, 100);
+        Player firstPlayer = new Adventurer("Florian", "Ruzberg de Rivehaute", AvatarClass.ADVENTURER, 100);
 
         firstPlayer.addXp(15);
         System.out.println(firstPlayer);
         System.out.println("\nMoney : " + firstPlayer.getMoney());
-        System.out.println("Current Health Points : " + firstPlayer.getCurrentHealthPoints());
-        System.out.println("Health Points : " + firstPlayer.getHealthPoints());
+        System.out.println("HealthPoints : " + firstPlayer.getCurrentHealthPoints() + " / " + firstPlayer.getHealthPoints());
 
         System.out.println("------------------");
 
@@ -27,17 +23,15 @@ public class Main {
 
         System.out.println(firstPlayer);
         System.out.println("\nMoney : " + firstPlayer.getMoney());
-        System.out.println("Current Health Points : " + firstPlayer.getCurrentHealthPoints());
-        System.out.println("Health Points : " + firstPlayer.getHealthPoints());
-        
+        System.out.println("HealthPoints : " + firstPlayer.getCurrentHealthPoints() + " / " + firstPlayer.getHealthPoints());
+
         System.out.println("------------------");
 
         firstPlayer.sellObject(object);
-        firstPlayer.majFinDeTour();
+        firstPlayer.updateHealth();
 
         System.out.println(firstPlayer);
         System.out.println("\nMoney : " + firstPlayer.getMoney());
-        System.out.println("Current Health Points : " + firstPlayer.getCurrentHealthPoints());
-        System.out.println("Health Points : " + firstPlayer.getHealthPoints());
+        System.out.println("HealthPoints : " + firstPlayer.getCurrentHealthPoints() + " / " + firstPlayer.getHealthPoints());
     }
 }

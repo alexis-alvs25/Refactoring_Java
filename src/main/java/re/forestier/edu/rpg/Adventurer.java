@@ -18,28 +18,24 @@ public class Adventurer extends Player {
     ));
 
     @Override
-    protected HashMap<String, Integer> getAbilitiesByLevel(AvatarClass avatarClass, int level) {
+    protected HashMap<String, Integer> getAbilitiesByLevel(AvatarClass avatarClass, int level) {        // On surcharge la méthode pour l'adapter à l'aventurier et récupérer ses capacités
         return new HashMap<>(ADVENTURER_ABILITIES.get(avatarClass).get(level));
     }
 
     @Override
-    public void majFinDeTour() {
-        if (currenthealthpoints == 0) {
-            return;                         // Arrête immédiatement si le joueur est KO
+    public boolean updateHealth() {
+        
+        if (!super.updateHealth()) {              // On traite les cas généraux dans la classe mère
+            return false;                         // Arrête immédiatement si le joueur est KO
         }
 
-        if ((currenthealthpoints >= healthpoints / 2) && currenthealthpoints < healthpoints) {
-            return;
-        }
-
-        super.majFinDeTour();
-
-        currenthealthpoints += 2;
+        currentHealthPoints += 2;
         if (retrieveLevel() < 3) {
-            currenthealthpoints -= 1;
+            currentHealthPoints -= 1;
         }
-        if (currenthealthpoints > healthpoints) {
-            currenthealthpoints = healthpoints;
+        if (currentHealthPoints > healthPoints) {
+            currentHealthPoints = healthPoints;
         }
+        return true;
     }
 }

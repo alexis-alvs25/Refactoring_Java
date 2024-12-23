@@ -19,29 +19,25 @@ public class Goblin extends Player {
     ));
 
     @Override
-    protected HashMap<String, Integer> getAbilitiesByLevel(AvatarClass adventurer, int level) {
+    protected HashMap<String, Integer> getAbilitiesByLevel(AvatarClass adventurer, int level) {        // On surcharge la méthode pour l'adapter à l'aventurier et récupérer ses capacités
         return new HashMap<>(ADVENTURER_ABILITIES.get(adventurer).get(level));
     }
 
     @Override
-    public void majFinDeTour() {
-        if (currenthealthpoints == 0) {
-            return;                         // Arrête immédiatement si le joueur est KO
+    public boolean updateHealth() {
+        
+        if (!super.updateHealth()) {           // On traite les cas généraux dans la classe mère
+            return false;                         // Arrête immédiatement si le joueur est KO
         }
 
-        if ((currenthealthpoints >= healthpoints / 2) && currenthealthpoints < healthpoints) {
-            return;
-        }
-
-        super.majFinDeTour();
-
-        // Personnalisation de la méthode majFinDeTour pour le gobelin
-        currenthealthpoints += 1;
+        // Personnalisation de la méthode updateHealth pour le gobelin
+        currentHealthPoints += 1;
         if (inventory.stream().anyMatch(obj -> obj instanceof GameObject && ((GameObject) obj).getObjectName().equals("Magic Bow"))) {
-            currenthealthpoints -= 3;
+            currentHealthPoints -= 3;
         }
-        if (currenthealthpoints > healthpoints) {
-            currenthealthpoints = healthpoints;
+        if (currentHealthPoints > healthPoints) {
+            currentHealthPoints = healthPoints;
         }
+        return true;
     }
 }

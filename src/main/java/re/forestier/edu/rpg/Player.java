@@ -11,8 +11,8 @@ public abstract class Player {
     private int money;
     protected int xp;
     private int level;
-    protected int healthpoints;
-    protected int currenthealthpoints;
+    protected int healthPoints;
+    protected int currentHealthPoints;
     protected HashMap<String, Integer> abilities;
     protected ArrayList<GameObject> inventory;
     private int maxWeight;
@@ -25,8 +25,8 @@ public abstract class Player {
         this.avatarClass = avatarClass;
         this.money = money;
         this.level = 1;
-        this.healthpoints = 100;
-        this.currenthealthpoints = 50;
+        this.healthPoints = 100;
+        this.currentHealthPoints = 40;
         this.inventory = new ArrayList<>();
         this.maxWeight = 40;
         this.currentWeight = 0;
@@ -60,11 +60,11 @@ public abstract class Player {
     }
 
     public int getHealthPoints() {
-        return this.healthpoints;
+        return this.healthPoints;
     }
 
     public int getCurrentHealthPoints() {
-        return this.currenthealthpoints;
+        return this.currentHealthPoints;
     }
 
     public ArrayList<GameObject> getInventory() {
@@ -81,12 +81,12 @@ public abstract class Player {
 
     // ------------------- Setters -------------------
 
-    public void setHealthPoints (int healthpoints) {
-        this.healthpoints = healthpoints;
+    public void setHealthPoints (int healthPoints) {
+        this.healthPoints = healthPoints;
     }
 
-    public void setCurrentHealthPoints(int currenthealthpoints) {
-        this.currenthealthpoints = currenthealthpoints;
+    public void setCurrentHealthPoints(int currentHealthPoints) {
+        this.currentHealthPoints = currentHealthPoints;
     }
 
     public void setInventory(ArrayList<GameObject> inventory) {
@@ -153,15 +153,26 @@ public abstract class Player {
         return maximumLevel;
     }
 
-    public void majFinDeTour() {
-        if (currenthealthpoints == 0) {
+    public boolean updateHealth() {
+        boolean nextCase = true;
+
+        if (currentHealthPoints == 0) {
             System.out.println("Le joueur est KO !");
-            return;
+            nextCase = false;
+        }
+        
+        if (isHealthBetweenHalfAndFull()) {
+            nextCase = false;
         }
 
-        if (currenthealthpoints >= healthpoints) {
-            currenthealthpoints = healthpoints;
+        if (currentHealthPoints >= healthPoints) {
+            currentHealthPoints = healthPoints;
         }
+        return nextCase;
+    }
+
+    private boolean isHealthBetweenHalfAndFull() {
+        return (currentHealthPoints >= healthPoints / 2) && currentHealthPoints < healthPoints;
     }
 
     public boolean addXp(int xp) {
