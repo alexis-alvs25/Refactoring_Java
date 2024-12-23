@@ -3,6 +3,7 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 public class GameObject {
@@ -19,7 +20,8 @@ public class GameObject {
             "Magic Charm",  "Magic +10 for 5 rounds",
             "Rune Staff of Curse", "May burn your enemies... Or yourself. Who knows?",
             "Combat Edge", "Well, that's an edge",
-            "Holy Elixir", "Recover your HP"
+            "Holy Elixir", "Recover your HP",
+            "Magic Bow", "Magic +5 for 3 rounds"
         );
 
     public static Map<String, String> getLikelyobjects() {
@@ -78,6 +80,26 @@ public class GameObject {
         String randomKey = keys.get(rand.nextInt(keys.size()));
         String randomDescription = likelyObjects.get(randomKey);
         return new GameObject(randomKey, randomDescription, randomWeight, randomValue);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        GameObject that = (GameObject) obj;
+        boolean isEqual = weight == that.weight && value == that.value && Objects.equals(objectName, that.objectName) && Objects.equals(description, that.description);
+        
+        return isEqual;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(objectName, description, weight, value);
     }
 
     @Override

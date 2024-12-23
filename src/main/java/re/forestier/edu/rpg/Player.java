@@ -14,7 +14,7 @@ public abstract class Player {
     protected int healthpoints;
     protected int currenthealthpoints;
     protected HashMap<String, Integer> abilities;
-    protected ArrayList<Object> inventory;
+    protected ArrayList<GameObject> inventory;
     private int maxWeight;
     private int currentWeight;
 
@@ -26,7 +26,7 @@ public abstract class Player {
         this.money = money;
         this.level = 1;
         this.healthpoints = 100;
-        this.currenthealthpoints = 100;
+        this.currenthealthpoints = 50;
         this.inventory = new ArrayList<>();
         this.maxWeight = 40;
         this.currentWeight = 0;
@@ -67,7 +67,7 @@ public abstract class Player {
         return this.currenthealthpoints;
     }
 
-    public ArrayList<Object> getInventory() {
+    public ArrayList<GameObject> getInventory() {
         return this.inventory;
     }
 
@@ -89,7 +89,7 @@ public abstract class Player {
         this.currenthealthpoints = currenthealthpoints;
     }
 
-    public void setInventory(ArrayList<Object> inventory) {
+    public void setInventory(ArrayList<GameObject> inventory) {
         this.inventory = inventory;
     }
 
@@ -104,6 +104,19 @@ public abstract class Player {
         }
         this.inventory.add(object);
         this.currentWeight += object.getWeight();
+    }
+
+    public void sellObject(GameObject object) {
+        if (!hasObject(object)) {
+            throw new IllegalArgumentException("This object is not in the inventory !");
+        }
+        this.inventory.remove(object);
+        this.money += object.getValue();
+        this.currentWeight -= object.getWeight();
+    }
+
+    public boolean hasObject(GameObject object) {
+        return inventory.contains(object); // Utilise equals() de GameObject
     }
 
     public void removeMoney(int amount) {
