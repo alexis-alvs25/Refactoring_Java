@@ -222,4 +222,11 @@ public abstract class Player {
     
         return sb.toString();
     }
+
+    public String toMarkdown() {
+        return "## Joueur Gnognak le Barbare joué par Florian" + 
+               "### Niveau : 2 (XP totale : 20)" + 
+               "#### Capacités :" + " - `DEF` : 1" + " - `ATK` : 3" + " - `CHA` : 3" + " - `INT` : 2" +
+               "#### Inventaire :" + " - **Lookout Ring** : *Prevents surprise attacks (Weight: 3, Value: 6)*";
+    }
 }
