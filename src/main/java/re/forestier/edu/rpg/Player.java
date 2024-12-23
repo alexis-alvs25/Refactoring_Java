@@ -30,7 +30,7 @@ public abstract class Player {
         this.inventory = new ArrayList<>();
         this.maxWeight = 40;
         this.currentWeight = 0;
-        this.abilities = new HashMap<>(getAbilitiesByLevel(avatarClass, 1));
+        this.abilities = getAbilitiesByLevel(avatarClass, 1);
     }
 
     // ------------------- Getters -------------------
@@ -140,7 +140,7 @@ public abstract class Player {
 
     public int retrieveLevel() {
         HashMap<Integer, Integer> levels = new HashMap<>();
-        int maximumLevel = 10;                  // Niveau maximum choisi arbitrairement
+        int maximumLevel = 5;                  // Niveau maximum choisi arbitrairement
         levels.put(1, 0);
         
         for (int lvl = 2; lvl <= maximumLevel; lvl++) {
@@ -168,22 +168,28 @@ public abstract class Player {
         if (xp < 0) {
             throw new IllegalArgumentException("XP cannot be negative");
         }
+        
+        boolean leveledUp = false;
         this.xp += xp;
         int newLevel = retrieveLevel();
 
         if (newLevel > this.level) {                                                                           // Player leveled-up!
             this.level = newLevel;
-            addObjectToInventory(GameObject.giveRandomObject());     //TODO : utiliser Random
-
-            // Add/upgrade abilities to player
-            HashMap<String, Integer> newAbilities = new HashMap<>(this.abilities);
-            getAbilitiesByLevel(this.avatarClass, this.level).forEach((ability, level) -> {
-                newAbilities.put(ability, level);
-            });
-            this.abilities = newAbilities;
-            return true;
+            addObjectToInventory(GameObject.giveRandomObject());
+            getNewAbilities();
+            leveledUp = true;
         }
-        return false;
+        return leveledUp;
+    }
+
+    private void getNewAbilities() {
+        // Add/upgrade abilities to player
+        HashMap<String, Integer> newAbilities = new HashMap<>(this.abilities);
+
+        getAbilitiesByLevel(this.avatarClass, this.level).forEach((ability, level) -> {
+            newAbilities.put(ability, level);
+        });
+        this.abilities = newAbilities;
     }
 
     @Override

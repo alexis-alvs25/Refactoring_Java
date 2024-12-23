@@ -7,6 +7,7 @@ import re.forestier.edu.rpg.GameObject;
 import re.forestier.edu.rpg.Goblin;
 import re.forestier.edu.rpg.Player;
 
+@SuppressWarnings("unused")
 public class Main {
     public static void main(String[] args) {
         Player firstPlayer = new Dwarf("Florian", "Ruzberg de Rivehaute", AvatarClass.DWARF, 100);
@@ -19,7 +20,7 @@ public class Main {
 
         System.out.println("------------------");
 
-        firstPlayer.addXp(200);
+        firstPlayer.addXp(400);
 
         GameObject object = new GameObject("Draupnir", "Increases XP gained by 100%", 5, 50);
         firstPlayer.addObjectToInventory(object);
