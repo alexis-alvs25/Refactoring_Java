@@ -13,7 +13,7 @@ public class Main {
         // System.out.println("\nCurrent Health Points : " + firstPlayer.getCurrentHealthPoints());
         // System.out.println("HealthPoints : " + firstPlayer.getHealthPoints()); 
         System.out.println("------------------");
-        firstPlayer.addXp(25);
+        firstPlayer.addXp(200);
         // // firstPlayer.majFinDeTour();
         System.out.println(firstPlayer);
         // System.out.println("\nCurrent Health Points : " + firstPlayer.getCurrentHealthPoints());

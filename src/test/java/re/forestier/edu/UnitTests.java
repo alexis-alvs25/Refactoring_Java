@@ -12,6 +12,7 @@ import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.Archer;
 import re.forestier.edu.rpg.AvatarClass;
 import re.forestier.edu.rpg.Dwarf;
+import re.forestier.edu.rpg.GameObject;
 import re.forestier.edu.rpg.Player;
 
 public class UnitTests {
@@ -143,7 +144,7 @@ public class UnitTests {
         Player p = new Dwarf("Florian", "Grognak le barbare", AvatarClass.DWARF, 100);
         p.setCurrentHealthPoints(1);
         p.setHealthPoints(4);
-        p.addInventory("Holy Elixir");
+        p.addObjectToInventory(new GameObject("Holy Elixir", "Recover your HP", 4, 70));
         p.majFinDeTour();
         assertThat(p.getCurrentHealthPoints(), is(3));
     }
@@ -164,7 +165,7 @@ public class UnitTests {
         Player p = new Archer("Florian", "Grognak le barbare", AvatarClass.ARCHER, 100);
         p.setCurrentHealthPoints(15);
         p.setHealthPoints(34);
-        p.addInventory("Magic Bow");
+        p.addObjectToInventory(new GameObject("Magic Bow", "Beautifull magic bow ^^", 8, 120));
         p.majFinDeTour();
         assertThat(p.getCurrentHealthPoints(), is(17));
     }
@@ -225,8 +226,8 @@ public class UnitTests {
     @DisplayName("Print test")
     void testAffichage() {
         Player p = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
-        p.addInventory("Magic Bow");
-        p.addInventory("Healing Potion");
+        p.addObjectToInventory(new GameObject("Magic Bow", "Beautifull magic bow ^^", 8, 120));
+        p.addObjectToInventory(new GameObject("Healing Potion", "Beautifull magic bow ^^", 1, 30));
 
         String result = p.toString();
 

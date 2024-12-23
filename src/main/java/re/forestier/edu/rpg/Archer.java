@@ -35,7 +35,7 @@ public class Archer extends Player {
         super.majFinDeTour();
         
         currenthealthpoints += 1;
-        if (inventory.contains("Magic Bow")) {
+        if (inventory.stream().anyMatch(obj -> obj instanceof GameObject && ((GameObject) obj).getObjectName().equals("Magic Bow"))) {
             currenthealthpoints += currenthealthpoints / 8 - 1;
         }
         if (currenthealthpoints > healthpoints) {

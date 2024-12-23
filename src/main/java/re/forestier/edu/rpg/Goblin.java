@@ -37,7 +37,7 @@ public class Goblin extends Player {
 
         // Personnalisation de la méthode majFinDeTour pour le gobelin
         currenthealthpoints += 1;
-        if (inventory.contains("Combat Edge")) {
+        if (inventory.stream().anyMatch(obj -> obj instanceof GameObject && ((GameObject) obj).getObjectName().equals("Magic Bow"))) {
             currenthealthpoints -= 3;
         }
         if (currenthealthpoints > healthpoints) {

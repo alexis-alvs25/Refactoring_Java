@@ -34,7 +34,7 @@ public class Dwarf extends Player {
         
         super.majFinDeTour();
         
-        if (inventory.contains("Holy Elixir")) {
+        if (inventory.stream().anyMatch(obj -> obj instanceof GameObject && ((GameObject) obj).getObjectName().equals("Holy Elixir"))) {
             currenthealthpoints += 1;
         }
         currenthealthpoints += 1;

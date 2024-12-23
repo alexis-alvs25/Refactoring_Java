@@ -3,7 +3,6 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public abstract class Player {
     private String playerName;
@@ -15,7 +14,10 @@ public abstract class Player {
     protected int healthpoints;
     protected int currenthealthpoints;
     protected HashMap<String, Integer> abilities;
-    protected ArrayList<String> inventory;
+    protected ArrayList<Object> inventory;
+    private int maxWeight;
+    private int currentWeight;
+
 
     public Player(String playerName, String avatarName, AvatarClass avatarClass, int money) {
         this.playerName = playerName;
@@ -26,6 +28,8 @@ public abstract class Player {
         this.healthpoints = 100;
         this.currenthealthpoints = 100;
         this.inventory = new ArrayList<>();
+        this.maxWeight = 40;
+        this.currentWeight = 0;
         this.abilities = new HashMap<>(getAbilitiesByLevel(avatarClass, 1));
     }
 
@@ -63,8 +67,16 @@ public abstract class Player {
         return this.currenthealthpoints;
     }
 
-    public ArrayList<String> getInventory() {
+    public ArrayList<Object> getInventory() {
         return this.inventory;
+    }
+
+    public int getMaxWeight() {
+        return maxWeight;
+    }
+
+    public int getCurrentWeight() {
+        return currentWeight;
     }
 
     // ------------------- Setters -------------------
@@ -77,14 +89,21 @@ public abstract class Player {
         this.currenthealthpoints = currenthealthpoints;
     }
 
-    public void setInventory(ArrayList<String> inventory) {
+    public void setInventory(ArrayList<Object> inventory) {
         this.inventory = inventory;
     }
 
     // ------------------- Methods -------------------
 
-    public void addInventory(String object) {
+    public void addObjectToInventory(GameObject object) {
+        if (object.getWeight() < 0) {
+            throw new IllegalArgumentException("Weight cannot be negative");
+        }
+        if (currentWeight + object.getWeight() > maxWeight) {
+            throw new IllegalArgumentException("Adding this object would exceed the maximum weight !");
+        }
         this.inventory.add(object);
+        this.currentWeight += object.getWeight();
     }
 
     public void removeMoney(int amount) {
@@ -132,8 +151,6 @@ public abstract class Player {
         }
     }
 
-    private static final Random random = new Random();
-
     public boolean addXp(int xp) {
         if (xp < 0) {
             throw new IllegalArgumentException("XP cannot be negative");
@@ -143,7 +160,7 @@ public abstract class Player {
 
         if (newLevel > this.level) {                                                                           // Player leveled-up!
             this.level = newLevel;
-            addInventory(Object.getObjectlist()[random.nextInt(Object.getObjectlist().length)]);     // Give a random object
+            addObjectToInventory(GameObject.giveRandomObject());     //TODO : utiliser Random
 
             // Add/upgrade abilities to player
             HashMap<String, Integer> newAbilities = new HashMap<>(this.abilities);
