@@ -239,4 +239,47 @@ public class UnitTests {
         assertThat(result, result.contains("\n   Magic Bow"));
         assertThat(result, result.contains("\n   Healing Potion"));
     }
+
+    @Test
+    @DisplayName("Markdown Title")
+    void testMarkdownTitle() {
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
+        String result = player.toMarkdown();
+
+        assertThat(result, result.startsWith("## Joueur Gnognak le Barbare joué par Florian"));
+    }
+
+    @Test
+    @DisplayName("Markdown XP")
+    void testMarkdownXp() {
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
+        player.addXp(20);
+        String result = player.toMarkdown();
+
+        assertThat(result, result.contains("### Niveau : 2 (XP totale : 20)"));
+    }
+
+    @Test
+    @DisplayName("Markdown Abilities")
+    void testMarkdownAbilities() {
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
+        player.addXp(20);
+        String result = player.toMarkdown();
+
+        assertThat(result, result.contains("#### Capacités :"));
+        assertThat(result, result.contains("- `DEF` : 1"));
+        assertThat(result, result.contains("- `ATK` : 3"));
+        assertThat(result, result.contains("- `CHA` : 3"));
+        assertThat(result, result.contains("- `INT` : 2"));
+    }
+
+    @Test
+    @DisplayName("Markdown Inventory")
+    void testMarkdownInventory() {
+        Player player = new Adventurer("Florian", "Grognak le barbare", AvatarClass.ADVENTURER, 100);
+        player.addObjectToInventory(new GameObject("Lookout Ring", "Prevents surprise attacks", 3, 6));
+        String result = player.toMarkdown();
+        assertThat(result, result.contains("#### Inventaire :"));
+        assertThat(result, result.contains("- **Lookout Ring** : *Prevents surprise attacks (Weight: 3, Value: 6)*"));
+    }
 }

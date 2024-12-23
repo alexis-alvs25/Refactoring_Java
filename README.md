@@ -103,3 +103,19 @@ quelques règles de Markdown :
 * Les listes doivent commencer par `*` au début de la ligne ;
 
 Pour découvrir davantage la syntaxe Markdown, regardez le contenu de ce fichier !
+
+
+
+# Test de Markdown
+
+## Joueur Gnognak le Barbare joué par Florian
+### Niveau : 2 (XP totale : 20)
+#### Capacités :
+- `DEF` : 1
+- `ATK` : 3
+- `CHA` : 3
+- `INT` : 2
+
+#### Inventaire :
+- **Lookout Ring** : *Prevents surprise attacks (Weight: 3, Value: 6)*
+- **Magic Charm** : *Magic +10 for 5 rounds (Weight: 5, Value: 7)*
