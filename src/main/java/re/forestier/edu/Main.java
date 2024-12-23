@@ -33,5 +33,7 @@ public class Main {
         System.out.println(firstPlayer);
         System.out.println("\nMoney : " + firstPlayer.getMoney());
         System.out.println("HealthPoints : " + firstPlayer.getCurrentHealthPoints() + " / " + firstPlayer.getHealthPoints());
+
+        System.out.println("\n\n" + firstPlayer.toMarkdown());
     }
 }

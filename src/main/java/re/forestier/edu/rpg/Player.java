@@ -224,9 +224,21 @@ public abstract class Player {
     }
 
     public String toMarkdown() {
-        return "## Joueur Gnognak le Barbare joué par Florian" + 
-               "### Niveau : 2 (XP totale : 20)" + 
-               "#### Capacités :" + " - `DEF` : 1" + " - `ATK` : 3" + " - `CHA` : 3" + " - `INT` : 2" +
-               "#### Inventaire :" + " - **Lookout Ring** : *Prevents surprise attacks (Weight: 3, Value: 6)*";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("## Joueur ").append(avatarName).append(" joué par ").append(playerName)
+          .append("\n### Niveau : ").append(retrieveLevel()).append(" (XP totale : ").append(xp).append(")")
+          .append("\n#### Capacités :");
+    
+        List<String> abilityOrder = List.of("DEF", "ATK", "CHA", "INT", "ALC", "VIS");
+    
+        abilityOrder.stream()
+            .filter(abilities::containsKey) // Ne garde que les capacités présentes
+            .forEach(name -> sb.append("\n- `").append(name).append("` : ").append(abilities.get(name)));
+    
+        sb.append("\n#### Inventaire :");
+        inventory.stream().forEach(item -> sb.append("\n- **").append(item.getObjectName()).append("** : ").append("*").append(item.getDescription()).append(" (Weight: ").append(item.getWeight()).append(", Value: ").append(item.getValue()).append(")*"));
+    
+        return sb.toString();
     }
 }
